@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": "@basis-theory/eslint-config/next",
+  "rules": {
+    "unicorn/no-null": "off",
+    "camelcase": [
+      "error",
+      {
+        "allow": [
+          "expires_at"
+        ]
+      }
+    ]
+  }
+}
