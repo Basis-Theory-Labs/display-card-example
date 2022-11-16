@@ -13,7 +13,7 @@ NEXT_PUBLIC_BASIS_THEORY_PUBLIC_KEY=
 
 The Private Application needs to have `token:read` permission on the `/pci/high/` container with `reveal` transform, and it should be able to create `expiring` applications.
 
-The Public Application needs to have `token:create` permission on the `/pci/high` container.
+The Public Application needs to have `token:create` permission on the `/pci/high/` container.
 
 ## 2. Create Card Token
 
