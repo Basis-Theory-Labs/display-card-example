@@ -18,17 +18,19 @@ export const CardForm = ({ onTokenize }: Props) => {
   const { bt } = useBasisTheory();
 
   const tokenize = async () => {
-    setBusy(true);
-    const token = (await bt?.tokens.create({
-      type: 'card',
-      data: cardRef.current,
-      expiresAt: ttl(),
-    })) as Token;
+    if (bt) {
+      setBusy(true);
+      const token = await bt.tokens.create({
+        type: 'card',
+        data: cardRef.current,
+        expiresAt: ttl(),
+      });
 
-    await cardRef.current?.clear();
-    setCardComplete(false);
-    setBusy(false);
-    onTokenize?.(token);
+      await cardRef.current?.clear();
+      setCardComplete(false);
+      setBusy(false);
+      onTokenize?.(token);
+    }
   };
 
   return (

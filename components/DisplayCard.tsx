@@ -36,22 +36,24 @@ export const DisplayCard = ({ tokenId }: Props) => {
   const showCardholderData = async () => {
     setBusy(true);
 
-    if (bt) {
+    if (bt && tokenId) {
       const {
         data: { expiringKey },
-      } = await axios.post('/api/authorize');
+      } = await axios.post('/api/authorize', {
+        tokenId,
+      });
 
-      const _token = await bt.tokens.retrieve(tokenId as string, {
+      const _token = await bt.tokens.retrieve(tokenId, {
         apiKey: expiringKey,
       });
 
       await Promise.all([
-        (cardNumberRef.current as any)?.setValue((_token.data as any).number),
-        (cardExpirationRef.current as any)?.setValue({
-          year: (_token.data as any).expiration_year,
-          month: (_token.data as any).expiration_month,
+        cardNumberRef.current?.setValue(_token.data.number),
+        cardExpirationRef.current?.setValue({
+          year: _token.data.expiration_year,
+          month: _token.data.expiration_month,
         }),
-        // (cvcRef.current as any)?.setValue((_token.data as any).cvc), // currently disabled
+        cvcRef.current?.setValue(_token.data.cvc),
       ]);
 
       setToken(_token);

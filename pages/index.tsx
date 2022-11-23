@@ -41,7 +41,7 @@ const Home = () => {
   const [tokenId, setTokenId] = useState<string>();
 
   const { bt } = useBasisTheory(
-    process.env.NEXT_PUBLIC_BASIS_THEORY_PUBLIC_KEY as string,
+    process.env.NEXT_PUBLIC_BASIS_THEORY_PUBLIC_KEY,
     {
       elements: true,
     }

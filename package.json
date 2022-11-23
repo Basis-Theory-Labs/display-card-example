@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@basis-theory/basis-theory-js": "^1.54.0",
-    "@basis-theory/basis-theory-react": "^1.6.0",
+    "@basis-theory/basis-theory-js": "^1.56.1",
+    "@basis-theory/basis-theory-react": "^1.7.0",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.5",
