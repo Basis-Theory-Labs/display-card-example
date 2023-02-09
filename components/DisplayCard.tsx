@@ -23,28 +23,42 @@ interface Props {
   tokenId?: string;
 }
 
+interface Session {
+  sessionKey: string;
+  nonce: string;
+}
+
 export const DisplayCard = ({ tokenId }: Props) => {
   const [busy, setBusy] = useState(false);
   const [token, setToken] = useState<Token>();
-
+  const [session, setSession] = useState<Session>();
   const { bt } = useBasisTheory();
 
   const cardNumberRef = useRef<ICardNumberElement>(null);
   const cardExpirationRef = useRef<ICardExpirationDateElement>(null);
   const cvcRef = useRef<ICardVerificationCodeElement>(null);
 
+  useEffect(() => {
+    const createSession = async () => {
+      setSession(await bt?.sessions.create());
+    };
+
+    if (bt && !session) {
+      createSession();
+    }
+  }, [bt, session]);
+
   const showCardholderData = async () => {
     setBusy(true);
 
-    if (bt && tokenId) {
-      const {
-        data: { expiringKey },
-      } = await axios.post('/api/authorize', {
+    if (bt && tokenId && session) {
+      await axios.post('/api/authorize', {
+        nonce: session.nonce,
         tokenId,
       });
 
       const _token = await bt.tokens.retrieve(tokenId, {
-        apiKey: expiringKey,
+        apiKey: session.sessionKey,
       });
 
       await Promise.all([
