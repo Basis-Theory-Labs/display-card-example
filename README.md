@@ -26,6 +26,6 @@ While the goal of this repository is to demonstrate display Card data through se
 When the user clicks "Show Details":
 
 1. The React client makes a request to a local `/api/authorize`, passing the recently created token id and the session nonce;
-2. The server authorizes the session via its nonce and scope it to the token id;
+2. The server authorizes the session via its nonce and scopes it to the token id;
 3. The React client retrieves the token using the session key;
 4. The React client sets the elements value using the returned data;
